@@ -1,15 +1,24 @@
-const mysql = require('promise-mysql');
+const mysql = require("mysql");
+let connection;
 
-module.exports = async function() {
-    // create DB Connection
-    try {
-        const conn = await mysql.createConnection(require('./db-config'));
-        console.log('DATABASE CONNECTION ESTABLISHED');
-        console.table(conn.config);
-        return conn;
-    } catch (error) {
-        console.log('ERROR: DB CONNECTION FAILED');
-        console.table(error);
-        process.exit(1);
-    }
+if (process.env.JAWSDB_URL) {
+    connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+    connection = mysql.createConnection({
+        port: 3306,
+        host: "localhost",
+        user: "root",
+        password: "Dragoneye123#",
+        database: "burgers_db"
+    });
 };
+
+connection.connect(function(err) {
+    if (err) {
+        console.log("error connecting: " + err.stack);
+        return;
+    }
+    console.log("connected as id " + connection.threadId);
+});
+
+module.exports = connection;
