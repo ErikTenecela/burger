@@ -19,5 +19,9 @@ app.engine(
 
 app.set("view engine", "handlebars");
 
-const PORT = 3000;
+const routes = require("./controller/routes");
+
+app.use("/", routes);
+
+const PORT = 8080;
 app.listen(`Server is being listen on ${PORT}`);
