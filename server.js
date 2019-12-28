@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
@@ -23,5 +24,7 @@ const routes = require("./controller/routes");
 
 app.use("/", routes);
 
-const PORT = 8080;
-app.listen(`Server is being listen on ${PORT}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is being listen on ${PORT}`);
+});
