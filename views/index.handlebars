@@ -4,8 +4,24 @@
             <h1>Eat da burger</h1>
         </div>
         <div class="col-xs-6 text-center" class='task'>
-            {{#each burger_data}}
-            {{#unless this.devoured}}
+            <div class='row'>
+                {{#each burger_data}}
+                {{#unless this.devoured}}
+                <div class='col-xs-9 text-center'>
+                    <pre>{{this.id}}. {{this.burger_name}}</pre>
+                </div>
+                <div class='col-xs-3 text-center'>
+                    <form method="POST" action='/burgers/update?_method=PUT' class='button-size'>
+                        <input type='hidden' name='burger_id' type="text" value={{this.id}}>
+                        <br>
+                        <button type='submit' class='btn btn-defualt'> Devour It!</button>
+                    </form>
+                </div>
+                {{/unless}}
+                {{/each}}
+
+            </div>
+
         </div>
     </div>
 </div>
